@@ -138,91 +138,14 @@
 }
 
 .cursor-glow {
-  --cursor-x: 50vw;
-  --cursor-y: 50vh;
   position: fixed;
-  left: 0;
-  top: 0;
-  width: 1px;
-  height: 1px;
-  z-index: 0;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
   pointer-events: none;
-  opacity: 0;
-  transform: translate3d(var(--cursor-x), var(--cursor-y), 0);
-  transition: opacity 900ms ease;
-  will-change: transform, opacity;
-}
-
-/* Large, soft, fluid neon blobs that follow the cursor with an extended aura */
-.neon-orb {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  border-radius: 50%;
-  filter: blur(90px);
   mix-blend-mode: screen;
-  transform-origin: center;
-  pointer-events: none;
-  will-change: transform;
-}
-
-.neon-orb-core {
-  width: min(16vw, 12rem);
-  height: min(16vw, 8rem);
-  background: radial-gradient(
-    circle at 40% 40%,
-    color-mix(in oklab, var(--foreground) 55%, transparent) 0%,
-    color-mix(in oklab, var(--neon-blue) 55%, transparent) 38%,
-    color-mix(in oklab, var(--neon-blue) 22%, transparent) 62%,
-    transparent 78%
-  );
-  transform: translate(-54%, -52%);
-  animation: orb-drift 10s ease-in-out infinite alternate;
-}
-
-.neon-orb-cyan {
-  width: min(58vw, 38rem);
-  height: min(58vw, 38rem);
-  background: radial-gradient(
-    circle at 55% 55%,
-    color-mix(in oklab, oklch(0.92 0.06 230) 52%, transparent) 0%,
-    color-mix(in oklab, var(--neon-blue) 32%, transparent) 45%,
-    transparent 72%
-  );
-  transform: translate(-42%, -58%);
-  animation: orb-drift 8s ease-in-out infinite alternate-reverse;
-  animation-delay: -3s;
-}
-
-.neon-orb-violet {
-  width: min(64vw, 42rem);
-  height: min(64vw, 42rem);
-  background: radial-gradient(
-    circle at 45% 60%,
-    color-mix(in oklab, var(--neon-violet) 42%, transparent) 0%,
-    color-mix(in oklab, var(--orchid) 26%, transparent) 48%,
-    transparent 74%
-  );
-  transform: translate(-60%, -38%);
-  animation: orb-drift 12s ease-in-out infinite alternate;
-  animation-delay: -6s;
-}
-
-@keyframes orb-drift {
-  0% {
-    transform: translate(var(--orb-offset-x, -50%), var(--orb-offset-y, -50%)) scale(0.92);
-  }
-  100% {
-    transform: translate(var(--orb-offset-x, -50%), var(--orb-offset-y, -50%)) scale(1.12);
-  }
-}
-
-.neon-orb-core { --orb-offset-x: -54%; --orb-offset-y: -52%; }
-.neon-orb-cyan { --orb-offset-x: -42%; --orb-offset-y: -58%; }
-.neon-orb-violet { --orb-offset-x: -60%; --orb-offset-y: -38%; }
-
-.cursor-glow[data-visible="true"] {
-  opacity: 1;
+  will-change: contents;
 }
 
 .spotlight-card {
