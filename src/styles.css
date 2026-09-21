@@ -219,9 +219,11 @@
   animation: shimmer 6s linear infinite;
 }
 
-@media (pointer: coarse), (prefers-reduced-motion: reduce) {
-  .cursor-glow,
-  .spotlight-card::before {
-    display: none;
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-slow,
+  .animate-twinkle,
+  .animate-rise,
+  .shimmer-text {
+    animation: none;
   }
 }
