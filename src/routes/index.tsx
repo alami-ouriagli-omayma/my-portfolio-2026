@@ -10,7 +10,6 @@ import {
 } from "lucide-react";
 
 import portrait from "@/assets/avatar agent.png";
-import { CursorGlow } from "@/components/CursorGlow";
 import { SparkleAccents, SparkleField } from "@/components/Sparkles";
 
 import {
