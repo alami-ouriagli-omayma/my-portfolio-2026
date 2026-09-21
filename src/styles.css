@@ -137,43 +137,6 @@
   }
 }
 
-.cursor-glow {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 2;
-  pointer-events: none;
-  mix-blend-mode: screen;
-  will-change: contents;
-}
-
-.spotlight-card {
-  --spotlight-x: 50%;
-  --spotlight-y: 50%;
-  isolation: isolate;
-  overflow: hidden;
-}
-
-.spotlight-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0;
-  background: radial-gradient(
-    18rem circle at var(--spotlight-x) var(--spotlight-y),
-    color-mix(in oklab, var(--accent) 20%, transparent),
-    transparent 68%
-  );
-  transition: opacity 500ms ease;
-}
-
-.spotlight-card:hover::before {
-  opacity: 1;
-}
-
 @utility gradient-text {
   background-image: var(--gradient-text);
   background-clip: text;
@@ -256,9 +219,11 @@
   animation: shimmer 6s linear infinite;
 }
 
-@media (pointer: coarse), (prefers-reduced-motion: reduce) {
-  .cursor-glow,
-  .spotlight-card::before {
-    display: none;
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-slow,
+  .animate-twinkle,
+  .animate-rise,
+  .shimmer-text {
+    animation: none;
   }
 }
