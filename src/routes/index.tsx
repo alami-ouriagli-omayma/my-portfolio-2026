@@ -63,7 +63,6 @@ function Index() {
 
   return (
     <div className="relative min-h-screen overflow-x-hidden">
-      <CursorGlow />
       {/* Ambient glow + constellation sparkles */}
       <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10">
         <div className="absolute -left-40 top-[-10%] h-[36rem] w-[36rem] animate-float-slow rounded-full bg-accent/20 blur-[140px]" />
