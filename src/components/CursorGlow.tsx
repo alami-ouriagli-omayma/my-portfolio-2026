@@ -34,12 +34,15 @@ export function CursorGlow() {
 
     const drawTrail = (offset: number, width: number, color: string, alpha: number) => {
       if (points.length < 3) return;
+      const first = points[0];
+      if (!first) return;
       context.beginPath();
-      context.moveTo(points[0].x, points[0].y + offset);
+      context.moveTo(first.x, first.y + offset);
 
       for (let index = 1; index < points.length - 1; index += 1) {
         const point = points[index];
         const next = points[index + 1];
+        if (!point || !next) continue;
         context.quadraticCurveTo(
           point.x,
           point.y + offset,
@@ -49,6 +52,7 @@ export function CursorGlow() {
       }
 
       const head = points[points.length - 1];
+      if (!head) return;
       context.lineTo(head.x, head.y + offset);
       context.lineCap = "round";
       context.lineJoin = "round";
