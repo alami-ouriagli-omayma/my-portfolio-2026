@@ -32,7 +32,7 @@ export function CursorGlow() {
       context.setTransform(ratio, 0, 0, ratio, 0, 0);
     };
 
-    const drawTrail = (offset: number, width: number, color: string, alpha: number) => {
+    const drawTrail = (offset: number, width: number, color: string, alpha: number, blur: number) => {
       if (points.length < 3) return;
       const first = points[0];
       if (!first) return;
@@ -60,8 +60,20 @@ export function CursorGlow() {
       context.strokeStyle = color;
       context.globalAlpha = alpha;
       context.shadowColor = color;
-      context.shadowBlur = width * 2.2;
+      context.shadowBlur = blur;
       context.stroke();
+    };
+
+    const drawHead = () => {
+      const head = points[points.length - 1];
+      if (!head) return;
+      const glow = context.createRadialGradient(head.x, head.y, 0, head.x, head.y, 24);
+      glow.addColorStop(0, "oklch(0.88 0.17 245 / 0.9)");
+      glow.addColorStop(0.28, "oklch(0.79 0.2 245 / 0.45)");
+      glow.addColorStop(1, "oklch(0.72 0.25 300 / 0)");
+      context.globalAlpha = Math.min(1, head.life);
+      context.fillStyle = glow;
+      context.fillRect(head.x - 24, head.y - 24, 48, 48);
     };
 
     const animate = () => {
@@ -74,10 +86,11 @@ export function CursorGlow() {
       if (points.length > 2) {
         context.save();
         context.globalCompositeOperation = "lighter";
-        drawTrail(-5, 8, "oklch(0.79 0.2 245)", 0.5);
-        drawTrail(4, 6, "oklch(0.85 0.2 155)", 0.34);
-        drawTrail(0, 4, "oklch(0.72 0.25 300)", 0.52);
-        drawTrail(0, 1.5, "oklch(0.96 0.03 240)", 0.7);
+        drawTrail(-10, 30, "oklch(0.79 0.2 245)", 0.16, 34);
+        drawTrail(10, 24, "oklch(0.85 0.2 155)", 0.13, 30);
+        drawTrail(0, 18, "oklch(0.72 0.25 300)", 0.2, 24);
+        drawTrail(-3, 7, "oklch(0.79 0.2 245)", 0.58, 16);
+        drawHead();
         context.restore();
       }
 
@@ -89,7 +102,7 @@ export function CursorGlow() {
       const now = performance.now();
       if (now - lastPointAt > 12) {
         points.push({ x: event.clientX, y: event.clientY, life: 1 });
-        if (points.length > 26) points.shift();
+        if (points.length > 22) points.shift();
         lastPointAt = now;
       }
 
